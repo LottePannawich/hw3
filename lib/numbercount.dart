@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'dart:math';
+
 
 import 'game.dart';
 
@@ -10,7 +10,7 @@ void main() {
   var game = Game();
 
   var isCorrect = false;
-
+var rd = false;
 
   print('╔════════════════════════════════════════');
   print('║            GUESS THE NUMBER            ');
@@ -18,6 +18,7 @@ void main() {
 
 
   do {
+
     stdout.write('║ Guess the number between 1 and $maxRandom: ');
     var input = stdin.readLineSync();
     var guess = int.tryParse(input!);
@@ -27,7 +28,9 @@ void main() {
 
 
     var result = game.doGuess(guess);
-    var c=game.guessCount;
+
+
+    var c = game.count;
     if (result == 1) {
       print('║ ➜ $guess is TOO HIGH! ▲');
       print('╟────────────────────────────────────────');
@@ -37,10 +40,25 @@ void main() {
     } else {
       print('║ ➜ $guess is CORRECT ❤, total guesses: $c');
       print('╟────────────────────────────────────────');
-      isCorrect = true;
+      print('║                 THE END                ');
+      print('╚════════════════════════════════════════');
+    rd = false;
+do{
+      stdout.write('Play again Y/N:');
+      var ooo = stdin.readLineSync();
+      if (ooo == "Y") {
+        isCorrect = false;
+        rd =true;
+        print('╔════════════════════════════════════════');
+        print('║            GUESS THE NUMBER            ');
+        print('╟────────────────────────────────────────');
+      } else if (ooo == "N") {
+        exit(0);
+      }
+    }while(!rd);
     }
+
   } while (!isCorrect);
 
-  print('║                 THE END                ');
-  print('╚════════════════════════════════════════');
-}
+
+  }
